@@ -5,6 +5,9 @@ let materialRows = [];
 
 // Initialize page
 document.addEventListener('DOMContentLoaded', async function() {
+    // Initialize view preference
+    initViewPreference('formulas', 'formulas-container');
+    
     await refreshCache();
     loadFormulas();
     loadMaterialOptions();
@@ -86,12 +89,15 @@ function loadMaterialOptions() {
     });
 }
 
-function openFormulaModal(formulaId = null) {
+async function openFormulaModal(formulaId = null) {
     editingFormulaId = formulaId;
     const modal = document.getElementById('formula-modal');
     const form = document.getElementById('formula-form');
     const title = document.getElementById('formula-modal-title');
     const saveBtn = document.getElementById('save-formula-btn');
+
+    // Ensure materials are loaded before opening modal
+    await refreshCache();
 
     if (formulaId) {
         const formula = findFormula(formulaId);
@@ -182,7 +188,10 @@ function getDefaultFormulaUnit(material) {
     return material.unit || 'g';
 }
 
-function addMaterialRow() {
+async function addMaterialRow() {
+    // Ensure materials are loaded before adding a row
+    await refreshCache();
+    
     materialRows.push({
         materialId: '',
         quantity: 0,
@@ -209,6 +218,16 @@ function renderMaterialRows() {
 
     if (materialRows.length === 0) {
         container.innerHTML = '<p style="color: var(--text-secondary); text-align: center; padding: 1rem;">No materials added yet. Click "Add Material" to get started.</p>';
+        return;
+    }
+
+    // Check if materials are available
+    if (!materials || materials.length === 0) {
+        container.innerHTML = '<p style="color: var(--text-warning); text-align: center; padding: 1rem;">Loading materials... Please wait.</p>';
+        // Retry after a short delay
+        setTimeout(() => {
+            renderMaterialRows();
+        }, 500);
         return;
     }
 
@@ -411,9 +430,5 @@ function filterFormulas() {
     });
 }
 
-function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-}
+// escapeHtml is defined in app.js - use global version
 

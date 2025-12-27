@@ -67,6 +67,10 @@
                 <button class="btn btn-secondary" onclick="openSaleModal()">
                     <span>📊</span> Record Sale
                 </button>
+                <div class="view-toggle view-toggle-products">
+                    <button data-view="cards" onclick="toggleView('products', 'products-container')" title="Card View">⊞</button>
+                    <button data-view="list" onclick="toggleView('products', 'products-container')" title="List View">☰</button>
+                </div>
                 <div class="search-box">
                     <input type="text" id="product-search" placeholder="Search products..." oninput="filterProducts()">
                 </div>

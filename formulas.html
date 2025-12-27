@@ -33,6 +33,10 @@
                 <button type="button" class="btn btn-primary" onclick="openFormulaModal()" id="create-formula-btn">
                     <span>+</span> Create New Formula
                 </button>
+                <div class="view-toggle view-toggle-formulas">
+                    <button data-view="cards" onclick="toggleView('formulas', 'formulas-container')" title="Card View">⊞</button>
+                    <button data-view="list" onclick="toggleView('formulas', 'formulas-container')" title="List View">☰</button>
+                </div>
                 <div class="search-box">
                     <input type="text" id="formula-search" placeholder="Search formulas..." oninput="filterFormulas()">
                 </div>

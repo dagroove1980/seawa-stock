@@ -4,10 +4,21 @@ const path = require('path');
 
 // Get environment variables and clean them thoroughly
 // Remove any literal \n\n sequences, trim whitespace, and remove any trailing newlines
-let supabaseUrl = (process.env.VITE_SUPABASE_URL || '').replace(/\\n\\n/g, '').replace(/\n\n/g, '').trim();
-let supabaseKey = (process.env.VITE_SUPABASE_ANON_KEY || '').replace(/\\n\\n/g, '').replace(/\n\n/g, '').trim();
+let rawUrl = process.env.VITE_SUPABASE_URL || '';
+let rawKey = process.env.VITE_SUPABASE_ANON_KEY || '';
 
 console.log('Build script running...');
+console.log('Raw URL length:', rawUrl.length);
+console.log('Raw Key length:', rawKey.length);
+console.log('Raw URL ends with:', JSON.stringify(rawUrl.slice(-20)));
+console.log('Raw Key ends with:', JSON.stringify(rawKey.slice(-20)));
+
+// Clean the values: remove all newlines (both literal and escaped), trim whitespace
+let supabaseUrl = rawUrl.replace(/\\n/g, '').replace(/\n/g, '').replace(/\r/g, '').trim();
+let supabaseKey = rawKey.replace(/\\n/g, '').replace(/\n/g, '').replace(/\r/g, '').trim();
+
+console.log('Cleaned URL length:', supabaseUrl.length);
+console.log('Cleaned Key length:', supabaseKey.length);
 console.log('VITE_SUPABASE_URL:', supabaseUrl ? `${supabaseUrl.substring(0, 30)}...` : 'NOT SET');
 console.log('VITE_SUPABASE_ANON_KEY:', supabaseKey ? `${supabaseKey.substring(0, 30)}...` : 'NOT SET');
 

@@ -2,6 +2,9 @@
 
 // Initialize page
 document.addEventListener('DOMContentLoaded', async function() {
+    // Initialize view preference
+    initViewPreference('products', 'products-container');
+    
     await refreshCache();
     loadProducts();
     loadFormulaOptions();
@@ -128,6 +131,13 @@ async function saveProduction(event) {
     const formulaId = document.getElementById('product-formula').value;
     const quantity = parseInt(document.getElementById('product-quantity').value);
     const productionDate = document.getElementById('product-date').value;
+
+    // Validate quantity
+    if (!quantity || quantity <= 0) {
+        showAlert('warning', 'Invalid Quantity', 'Please enter a valid quantity (greater than 0).');
+        document.getElementById('product-quantity').focus();
+        return;
+    }
 
     const formula = findFormula(formulaId);
     if (!formula) {
@@ -328,10 +338,6 @@ function formatDate(dateString) {
     return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
 }
 
-function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-}
+// escapeHtml is defined in app.js - use global version
 
 
