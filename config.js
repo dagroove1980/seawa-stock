@@ -1,0 +1,3 @@
+// Auto-generated config file - created during build
+window.SUPABASE_URL = "https://hzuneplhwnwtlwqndkva.supabase.co";
+window.SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh6dW5lcGxod253dGx3cW5ka3ZhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY4MTc2MzUsImV4cCI6MjA4MjM5MzYzNX0.MjhwCAsk9gGV_nZXG_aoY4fc16h4UVAnD8ngEjfxrMc";
