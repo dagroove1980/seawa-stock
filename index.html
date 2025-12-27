@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEAWA SOAP - Stock Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">🧼</span>
+                <span class="logo-text">SEAWA SOAP</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="materials.html" class="nav-link">Materials</a>
+                <a href="formulas.html" class="nav-link">Formulas</a>
+                <a href="products.html" class="nav-link">Products</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="landing-page">
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Welcome to SEAWA SOAP<br>Stock Management System</h1>
+                <p class="hero-subtitle">Streamline your soap production with intelligent inventory tracking, cost management, and automated alerts</p>
+                <div class="hero-features">
+                    <div class="feature-card">
+                        <div class="feature-icon">📦</div>
+                        <h3>Material Tracking</h3>
+                        <p>Monitor quantities and costs of all your raw materials</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🧪</div>
+                        <h3>Formula Management</h3>
+                        <p>Store and manage product formulas with precise measurements</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Product Inventory</h3>
+                        <p>Track production, sales, and current stock levels</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Smart Automation</h3>
+                        <p>Automatic calculations and low-stock alerts</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features-section">
+            <h2 class="section-title">Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-number">01</div>
+                    <h3>Real-Time Stock Tracking</h3>
+                    <p>Keep track of all your materials and products in real-time. See exactly what you have, what you've used, and what you need to reorder.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-number">02</div>
+                    <h3>Cost Management</h3>
+                    <p>Monitor the cost of each material and automatically calculate product costs based on your formulas. Know your margins at a glance.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-number">03</div>
+                    <h3>Automatic Calculations</h3>
+                    <p>When you create a new product, the system automatically deducts materials from your inventory based on your formulas. No manual calculations needed.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-number">04</div>
+                    <h3>Smart Alerts</h3>
+                    <p>Get notified when materials or products are running low. Quick links to suppliers make reordering effortless.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-number">05</div>
+                    <h3>Formula-Based Utilization</h3>
+                    <p>See exactly how much of each material you've used based on your production. Track utilization rates and optimize your inventory.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-number">06</div>
+                    <h3>Production History</h3>
+                    <p>Track every product you've created, sold, and have in stock. Complete visibility into your production pipeline.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2>Ready to Get Started?</h2>
+                <p>Navigate to Materials to add your raw materials, then set up your formulas, and start tracking your products.</p>
+                <div class="cta-buttons">
+                    <a href="materials.html" class="btn btn-primary">Manage Materials</a>
+                    <a href="formulas.html" class="btn btn-secondary">View Formulas</a>
+                    <a href="products.html" class="btn btn-secondary">Manage Products</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="alert-container"></div>
+    <script src="config.js"></script>
+    <script src="unit-converter.js"></script>
+    <script src="supabase.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
+
+

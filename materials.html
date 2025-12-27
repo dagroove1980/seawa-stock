@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materials Management - SEAWA SOAP</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">🧼</span>
+                <span class="logo-text">SEAWA SOAP</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="materials.html" class="nav-link active">Materials</a>
+                <a href="formulas.html" class="nav-link">Formulas</a>
+                <a href="products.html" class="nav-link">Products</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="page-content">
+        <div class="page-header">
+            <h1>Materials Management</h1>
+            <p class="page-subtitle">Track your raw materials, quantities, costs, and suppliers</p>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="action-bar">
+                <button class="btn btn-primary" onclick="openMaterialModal()">
+                    <span>+</span> Add New Material
+                </button>
+                <div class="view-toggle view-toggle-materials">
+                    <button data-view="cards" onclick="toggleView('materials', 'materials-container')" title="Card View" id="view-cards-btn">⊞</button>
+                    <button data-view="list" onclick="toggleView('materials', 'materials-container')" title="List View" id="view-list-btn">☰</button>
+                </div>
+                <div class="search-box">
+                    <input type="text" id="material-search" placeholder="Search materials..." oninput="filterMaterials()">
+                </div>
+            </div>
+
+            <div class="materials-grid" id="materials-container">
+                <!-- Materials will be dynamically inserted here -->
+            </div>
+
+            <div class="empty-state" id="empty-state" style="display: none;">
+                <div class="empty-icon">📦</div>
+                <h3>No Materials Yet</h3>
+                <p>Add your first raw material to get started</p>
+                <button class="btn btn-primary" onclick="openMaterialModal()">Add Material</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Material Modal -->
+    <div id="material-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Add New Material</h2>
+                <button class="modal-close" onclick="closeMaterialModal()">&times;</button>
+            </div>
+            <form id="material-form" onsubmit="saveMaterial(event)">
+                <div class="form-group">
+                    <label for="material-name">Material Name *</label>
+                    <input type="text" id="material-name" required placeholder="e.g., Shea Butter">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="material-quantity">Current Quantity *</label>
+                        <input type="number" id="material-quantity" step="0.01" required placeholder="0.00">
+                    </div>
+                    <div class="form-group">
+                        <label for="material-unit">Unit</label>
+                        <select id="material-unit">
+                            <option value="kg">kg</option>
+                            <option value="g">g</option>
+                            <option value="L">L</option>
+                            <option value="mL">mL</option>
+                            <option value="oz">oz</option>
+                            <option value="lb">lb</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="material-cost">Cost per Unit *</label>
+                        <input type="number" id="material-cost" step="0.01" required placeholder="0.00">
+                    </div>
+                    <div class="form-group">
+                        <label for="material-cost-unit">Cost Unit</label>
+                        <select id="material-cost-unit">
+                            <option value="kg">kg</option>
+                            <option value="g">g</option>
+                            <option value="L">L</option>
+                            <option value="mL">mL</option>
+                            <option value="oz">oz</option>
+                            <option value="lb">lb</option>
+                            <option value="units">units</option>
+                        </select>
+                        <small>Unit for cost calculation</small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="material-supplier">Supplier Name</label>
+                    <input type="text" id="material-supplier" placeholder="e.g., Natural Supplies Co.">
+                </div>
+                <div class="form-group">
+                    <label for="material-supplier-link">Supplier Link</label>
+                    <input type="url" id="material-supplier-link" placeholder="https://supplier.com/product">
+                </div>
+                <div class="form-group">
+                    <label for="material-min-stock">Minimum Stock Level</label>
+                    <input type="number" id="material-min-stock" step="0.01" placeholder="0.00">
+                    <small>Alert when stock falls below this level</small>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeMaterialModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Material</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="alert-container"></div>
+    <script src="config.js?v=2"></script>
+    <script src="unit-converter.js?v=2"></script>
+    <script src="supabase.js?v=2"></script>
+    <script src="app.js?v=2"></script>
+    <script src="materials.js?v=2"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products Management - SEAWA SOAP</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">🧼</span>
+                <span class="logo-text">SEAWA SOAP</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="materials.html" class="nav-link">Materials</a>
+                <a href="formulas.html" class="nav-link">Formulas</a>
+                <a href="products.html" class="nav-link active">Products</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="page-content">
+        <div class="page-header">
+            <h1>Products Inventory</h1>
+            <p class="page-subtitle">Track production, sales, and current stock levels</p>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="stats-cards">
+                <div class="stat-card">
+                    <div class="stat-icon">📦</div>
+                    <div class="stat-info">
+                        <div class="stat-value" id="total-products">0</div>
+                        <div class="stat-label">Total Products</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-info">
+                        <div class="stat-value" id="total-in-stock">0</div>
+                        <div class="stat-label">In Stock</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-info">
+                        <div class="stat-value" id="total-value">₪0.00</div>
+                        <div class="stat-label">Total Value</div>
+                    </div>
+                </div>
+                <div class="stat-card alert-card">
+                    <div class="stat-icon">⚠️</div>
+                    <div class="stat-info">
+                        <div class="stat-value" id="low-stock-count">0</div>
+                        <div class="stat-label">Low Stock Alerts</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-bar">
+                <button class="btn btn-primary" onclick="openProductModal()">
+                    <span>+</span> Add Production Batch
+                </button>
+                <button class="btn btn-secondary" onclick="openSaleModal()">
+                    <span>📊</span> Record Sale
+                </button>
+                <div class="search-box">
+                    <input type="text" id="product-search" placeholder="Search products..." oninput="filterProducts()">
+                </div>
+            </div>
+
+            <div class="products-grid" id="products-container">
+                <!-- Products will be dynamically inserted here -->
+            </div>
+
+            <div class="empty-state" id="empty-state" style="display: none;">
+                <div class="empty-icon">📦</div>
+                <h3>No Products Yet</h3>
+                <p>Create your first production batch to get started</p>
+                <button class="btn btn-primary" onclick="openProductModal()">Add Production</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Production Modal -->
+    <div id="product-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add Production Batch</h2>
+                <button class="modal-close" onclick="closeProductModal()">&times;</button>
+            </div>
+            <form id="product-form" onsubmit="saveProduction(event)">
+                <div class="form-group">
+                    <label for="product-formula">Select Formula *</label>
+                    <select id="product-formula" required onchange="updateProductionDetails()">
+                        <option value="">Choose a formula...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="product-quantity">Quantity Produced *</label>
+                    <input type="number" id="product-quantity" required min="1" placeholder="Number of units">
+                </div>
+                <div class="form-group">
+                    <label for="product-date">Production Date *</label>
+                    <input type="date" id="product-date" required>
+                </div>
+                <div class="info-box">
+                    <strong>Note:</strong> Materials will be automatically deducted from inventory based on the selected formula.
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeProductModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Record Production</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Sale Modal -->
+    <div id="sale-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Record Sale</h2>
+                <button class="modal-close" onclick="closeSaleModal()">&times;</button>
+            </div>
+            <form id="sale-form" onsubmit="recordSale(event)">
+                <div class="form-group">
+                    <label for="sale-product">Select Product *</label>
+                    <select id="sale-product" required>
+                        <option value="">Choose a product...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="sale-quantity">Quantity Sold *</label>
+                    <input type="number" id="sale-quantity" required min="1" placeholder="Number of units">
+                </div>
+                <div class="form-group">
+                    <label for="sale-date">Sale Date *</label>
+                    <input type="date" id="sale-date" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeSaleModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Record Sale</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="alert-container"></div>
+    <script src="config.js"></script>
+    <script src="unit-converter.js"></script>
+    <script src="supabase.js"></script>
+    <script src="app.js"></script>
+    <script src="products.js"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,10 @@
+{
+  "name": "seawa-soap-stock-manager",
+  "version": "1.0.0",
+  "description": "Stock management system for SEAWA SOAP",
+  "scripts": {
+    "build": "node vercel-build.js",
+    "deploy": "vercel --prod"
+  }
+}
+

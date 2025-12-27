@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulas - SEAWA SOAP</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">🧼</span>
+                <span class="logo-text">SEAWA SOAP</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="materials.html" class="nav-link">Materials</a>
+                <a href="formulas.html" class="nav-link active">Formulas</a>
+                <a href="products.html" class="nav-link">Products</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="page-content">
+        <div class="page-header">
+            <h1>Product Formulas</h1>
+            <p class="page-subtitle">Manage your product recipes and material requirements</p>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="action-bar">
+                <button type="button" class="btn btn-primary" onclick="openFormulaModal()" id="create-formula-btn">
+                    <span>+</span> Create New Formula
+                </button>
+                <div class="search-box">
+                    <input type="text" id="formula-search" placeholder="Search formulas..." oninput="filterFormulas()">
+                </div>
+            </div>
+
+            <div class="formulas-grid" id="formulas-container">
+                <!-- Formulas will be dynamically inserted here -->
+            </div>
+
+            <div class="empty-state" id="empty-state" style="display: none;">
+                <div class="empty-icon">🧪</div>
+                <h3>No Formulas Yet</h3>
+                <p>Create your first product formula to get started</p>
+                <button class="btn btn-primary" onclick="openFormulaModal()">Create Formula</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Formula Modal -->
+    <div id="formula-modal" class="modal" onclick="if(event.target === this) closeFormulaModal()">
+        <div class="modal-content modal-large" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2 id="formula-modal-title">Create New Formula</h2>
+                <button class="modal-close" onclick="closeFormulaModal()">&times;</button>
+            </div>
+            <form id="formula-form" onsubmit="saveFormula(event)" novalidate>
+                <div class="form-group">
+                    <label for="formula-name">Product Name *</label>
+                    <input type="text" id="formula-name" required placeholder="e.g., Lavender Soap Bar">
+                </div>
+                <div class="form-group">
+                    <label for="formula-batch-size">Batch Size (units produced) *</label>
+                    <input type="number" id="formula-batch-size" required placeholder="e.g., 10" min="1">
+                </div>
+                <div class="form-group">
+                    <label for="formula-min-stock">Minimum Stock Level</label>
+                    <input type="number" id="formula-min-stock" step="1" placeholder="e.g., 5" min="0">
+                    <small>Alert when product stock falls below this level</small>
+                </div>
+                
+                <div class="formula-materials-section">
+                    <div class="section-header">
+                        <h3>Materials Required</h3>
+                        <button type="button" class="btn btn-small" onclick="addMaterialRow()">+ Add Material</button>
+                    </div>
+                    <div id="formula-materials-list">
+                        <!-- Material rows will be added here -->
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeFormulaModal()">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="save-formula-btn" onclick="handleSaveFormula()">Save Formula</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="alert-container"></div>
+    <script src="config.js"></script>
+    <script src="unit-converter.js"></script>
+    <script src="supabase.js"></script>
+    <script src="app.js"></script>
+    <script src="formulas.js"></script>
+</body>
+</html>
+
